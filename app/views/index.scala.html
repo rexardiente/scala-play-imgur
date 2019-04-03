@@ -1,5 +1,65 @@
 @()
 
-@main("Welcome to Play") {
-  <h1>Welcome to Play!</h1>
+@main("Scala-Play Imgur API") {
+  <div class="container">
+    <br><br><br>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="notification-alert" id="notification-alert"></div>
+      </div>
+      <!-- Content here -->
+      <div class="col-sm-6">
+        <h2><b>INPUT</b></h2>
+        <!-- Upload URL input -->
+        <form>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-8">
+                <label for="inputImageURL">Image address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputImageURL"
+                  aria-describedby="urlHelp"
+                  placeholder="Enter url">
+              </div>
+              <div class="col-sm-4">
+                <label for="btn-add-to-list"></label>
+                <button type="button"
+                  class="btn btn-success form-control"
+                  id="btn-add-to-list">
+                  ADD URL
+                </button>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <small id="urlHelp" class="form-text text-muted">
+                Input images you want to upload to (Imgur) service.
+              </small>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary form-control" id="btn-upload-list">
+            UPLOAD NOW
+          </button>
+        </form>
+        <hr>
+
+        <!-- List of Images to be uploaded.. -->
+        <div class="col-sm-12" id="image-list"></div>
+      </div>
+      <div class="col-sm-6">
+        <div class="col-sm-12">
+          <!-- Upload status -->
+          <h2><b>CURRENT UPLOADS</b></h2>
+          <div class="progress-bar-count" id="progress-bar-count"></div>
+        </div>
+        <hr>
+        <div class="col-sm-12">
+          <!-- uploaded status -->
+          <h2><b>UPLOADED IMAGES</b></h2>
+          <div class="uploaded-images" id="uploaded-images"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 }

@@ -1,7 +1,7 @@
 package models.domain
 
 import java.util.UUID
-import play.api.libs.json._
+import play.api.libs.json.{ Json, JsValue }
 import models.implicits._
 
 case class SubmitResponse(val jobId: UUID) extends AnyVal {
@@ -9,5 +9,5 @@ case class SubmitResponse(val jobId: UUID) extends AnyVal {
 }
 
 object SubmitResponse {
-	def apply(id: String): SubmitResponse = apply(UUID.fromString(id))
+	def apply(jobId: String): SubmitResponse = apply(UUID.fromString(jobId))
 }

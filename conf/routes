@@ -7,7 +7,7 @@
 GET     /                           controllers.HomeController.index
 GET     /index                      controllers.HomeController.index
 
-# Websocket 
+# Websocket
 GET     /ws                      		controllers.HomeController.ws
 
 # Image Upload API's...
@@ -16,9 +16,6 @@ GET     /v1/images                  controllers.HomeController.images
 
 # Submit image URLs for upload
 POST    /v1/images/upload           controllers.HomeController.upload
-
-# Get upload job status
-GET 		/v1/images/upload/:id				controllers.HomeController.status(id: UUID)
 
 
 # Map static resources from the /public folder to the /assets URL path

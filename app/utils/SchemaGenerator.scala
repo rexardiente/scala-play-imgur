@@ -4,11 +4,11 @@ import javax.inject.{ Inject, Singleton }
 import scala.concurrent.ExecutionContext
 import play.api.db.slick.{ DatabaseConfigProvider, HasDatabaseConfigProvider }
 import slick.jdbc.JdbcProfile
-import models.dao.ClientDAO
+import models.dao.ImagesDAO
 
 @Singleton
 class SchemaGenerator @Inject()(
-    dao: ClientDAO,
+    dao: ImagesDAO,
     protected val dbConfigProvider: DatabaseConfigProvider
   )(implicit executionContext: ExecutionContext) extends HasDatabaseConfigProvider[JdbcProfile] {
   import profile.api._

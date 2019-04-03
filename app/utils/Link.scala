@@ -1,27 +1,32 @@
 package utils
 
-import java.util.UUID
-import scala.concurrent.Future
 import scala.sys.process._
-import akka.actor.ActorRef
-import models.domain.{ ImageInfo, Subscribe, ImageURLs, SavedImage }
-import akka.UpdatesManager._
+import models.domain.{ ImageInfo, Subscribe, ImageURLs, InMemoryImages }
+import akka.UpdatesManager.subscribers
 
-object Link {
-  // return Image (clientID, name, status)
-  def download(img: ImageURLs): Seq[SavedImage] = {
-    val wsClient: Option[ActorRef] = subscribers.lift(Subscribe(img.id))
+/*
+  validate images and save to DB.
+  return clientID, name and status after.
+*/
+class Link {
+  def download(imgs: ImageURLs): Seq[InMemoryImages] = {
+    // get account actor reference.
+    val subscriber: Option[akka.actor.ActorRef] = subscribers.lift(Subscribe(imgs.id))
 
-		img.urls.map { url => 
-    	val image: ImageInfo = new ImageInfo(url)
+    imgs.urls.map { url =>
+      val valid = validate(url)
 
-    	if (!image.file.exists) {
-	      new java.net.URL(url) #> image.file !!; // Save image..
+      (InMemoryImages.apply _) tupled (imgs.id, subscriber, valid._1, valid._2)
+    }
+  }
 
-	      new SavedImage(img.id, wsClient, image, true)
-	    } else {
-	    	new SavedImage(img.id, wsClient, image, false)
-	    }
-		}
+  def validate(url: String): (ImageInfo, Boolean) = {
+    val info: ImageInfo = new ImageInfo(url)
+
+    if (!info.file.exists) {
+      new java.net.URL(url) #> info.file !!; // Save image..
+
+      (info, true)
+    } else (info, false)
   }
 }

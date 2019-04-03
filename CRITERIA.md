@@ -127,12 +127,3 @@ Example response body:
     "https://i.imgur.com/skSpO.jpg"
   ]
 }
-
-
-
-Business Start
-1 - costumer // If not then stop.
-4 - Days  (To test if this is for you.)
-3 - Times the price of the product. (Inovation of the product.)
-
-And use the element og preselling.

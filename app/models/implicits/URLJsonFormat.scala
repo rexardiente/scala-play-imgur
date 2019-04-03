@@ -1,6 +1,5 @@
 package models.implicits
 
-import java.util.UUID
 import play.api.libs.json._
 import play.api.libs.functional.syntax._
 import models.domain.URL
@@ -24,6 +23,5 @@ trait URLJsonFormat {
 		override def writes(v: URL): JsValue = Json.obj("value" -> v.value)
 	}
 
-	implicit val urlFormat: Format[URL] = 
-		Format(urlReads, urlWrites)
+	implicit val urlFormat: Format[URL] = Format(urlReads, urlWrites)
 }

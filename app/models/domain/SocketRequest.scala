@@ -1,14 +1,18 @@
 package models.domain
 
 import play.api.libs.json._
+import play.api.libs.functional.syntax._
 import models.implicits._
 
-trait SocketRequest
+trait SocketRequest {
+  def toJson(): JsValue = Json.toJson(this)
+}
 
 object SocketRequest {
   implicit def requestsReads: Reads[SocketRequest] = {
     try {
-      subscribeFormat.map(x => x: SocketRequest)
+      subscribeFormat.map(v => v: SocketRequest) or
+      uploadServerReponseFormat.map(v => v: SocketRequest)
     } catch {
       case e: Exception => Reads {
         case _ => JsError(JsonValidationError("Cannot De-serialize SocketRequest value."))

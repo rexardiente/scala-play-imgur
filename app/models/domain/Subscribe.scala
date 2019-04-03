@@ -8,13 +8,15 @@ case class Subscribe(clientID: UUID, command: String) extends SocketRequest {
   try {
     require(command == "subscribe")
   } catch {
-    case e: Throwable => throw new IllegalArgumentException("Only subscribe command is allowed.")
+    case e: Throwable => 
+    	throw new IllegalArgumentException("Only subscribe command is allowed.")
   }
 
-  def toJson: JsValue = Json.toJson(this)
+  override def toJson: JsValue = Json.toJson(this)
 }
 
 object Subscribe {
-	def apply(id: String, command: String): Subscribe = apply(UUID.fromString(id), command)
+	def apply(id: String, cmd: String): Subscribe = apply(UUID.fromString(id), cmd)
+
 	def apply(id: UUID): Subscribe = apply(id, "subscribe")
 }

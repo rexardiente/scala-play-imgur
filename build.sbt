@@ -8,7 +8,10 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.12.8"
 
 libraryDependencies ++= Seq(
+  ws,
   guice,
+  "commons-io" % "commons-io" % "2.6",
+  "commons-codec"           %  "commons-codec"          % "1.12",
   "com.typesafe.akka" 		 	%% "akka-actor"							% "2.5.17",
   "com.typesafe.play" 			%% "play-json" 							% "2.7.0-M1",
   "com.h2database" 					%  "h2" 										% "1.4.192",
@@ -19,6 +22,7 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play"	%% "scalatestplus-play" 		% "4.0.1"			% Test
 )
 
+resolvers += Resolver.sonatypeRepo("releases")
 // overrides the update, updateClassifiers, and updateSbtClassifiers tasks.
 addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.1.0-M11")
 

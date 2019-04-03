@@ -12,8 +12,7 @@ trait SubscribeJsonFormat {
 				try {
 					JsSuccess(Subscribe(
 						(v \ "client_ID").as[UUID],
-						(v \ "command").as[String]
-					))
+						(v \ "command").as[String]))
 				} catch {
 					case e: Exception => 
 						JsError(JsonValidationError("Cannot De-serialize Subscribe Value."))
@@ -25,10 +24,7 @@ trait SubscribeJsonFormat {
 
 	private val subscribeWrites: Writes[Subscribe] = new Writes[Subscribe] {
 		override def writes(v: Subscribe): JsValue = 
-			Json.obj(
-				"client_ID" -> v.clientID,
-				"command" -> v.command
-			)
+			Json.obj("client_ID" -> v.clientID, "command" -> v.command)
 	}
 
 	implicit val subscribeFormat: Format[Subscribe] = 

@@ -1,6 +1,6 @@
 package models.domain
 
-import play.api.libs.json._
+import play.api.libs.json.{ JsValue, Json }
 import models.implicits._
 
 case class URL(val value: String) extends AnyVal {
